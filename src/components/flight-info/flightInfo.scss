@@ -1,0 +1,39 @@
+.flight-container {
+  padding: 5px;
+  width: 700px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+
+  .flight-box {
+    display: flex;
+  }
+
+  .col {
+    width: 80%;
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 20px;
+    }
+  }
+
+  .col-end {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: solid 1px lightgreen;
+
+    button {
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+      background-color: lightseagreen;
+      color: #fff;
+      font-size: 15px;
+      margin-top: 5px;
+      outline: none;
+    }
+  }
+}
