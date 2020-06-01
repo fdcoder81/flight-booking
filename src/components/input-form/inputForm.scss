@@ -1,0 +1,16 @@
+.input-group {
+  width: 100%;
+  position: relative;
+  input {
+    width: 100%;
+
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    &:focus {
+      outline: 0;
+      border-color: #777;
+    }
+  }
+}

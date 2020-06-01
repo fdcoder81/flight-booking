@@ -3,45 +3,48 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPlaces, clearPlaces } from '../../actions/getPlaces';
 import './search.scss';
-import Autocomplete from '../autocomplete/Autocomplete';
+import InputForm from '../input-form/InputForm';
 
 const Search = ({ getPlaces, clearPlaces, places: { places } }) => {
-  const [query, setQuery] = useState('');
-  const [isVisible, setIsVisible] = useState(true);
+  const [formData, setFormData] = useState({
+    from: '',
+    to: '',
+  });
 
   useEffect(() => {
-    console.log(query);
+    console.log(formData);
   });
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
-    e.target.value.length > 1 ? getPlaces(query) : clearPlaces();
-    setIsVisible(true);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    e.target.value.length > 0 ? getPlaces(e.target.value) : clearPlaces();
   };
 
-  const selectPlace = (place) => {
-    setQuery(place);
-    setIsVisible(false);
+  const selectPlace = (place, name) => {
+    setFormData({ ...formData, [name]: place });
   };
 
   return (
     <div className='search'>
       <form>
-        <input
-          onChange={handleChange}
-          type='text'
+        <InputForm
+          handleChange={(e) => handleChange(e)}
+          query={formData.from}
           placeholder='From'
-          value={query}
+          name='from'
+          places={places}
+          selectPlace={selectPlace}
+        />
+        <InputForm
+          handleChange={(e) => handleChange(e)}
+          query={formData.to}
+          placeholder='to'
+          name='to'
+          places={places}
+          selectPlace={selectPlace}
         />
         <input type='submit' value='Search' />
       </form>
-      {places.length > 0 && (
-        <Autocomplete
-          places={places}
-          selectPlace={selectPlace}
-          isVisible={isVisible}
-        />
-      )}
     </div>
   );
 };
